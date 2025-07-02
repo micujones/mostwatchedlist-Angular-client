@@ -162,8 +162,8 @@ export class UserRegistrationService {
     }
 
     // "pass a factory function to throwError(() => new Error('test'))
-    return throwError(
-      () => new Error('Something went wrong. Please try again later.')
-    );
+    return throwError(() => {
+      return new Error('Something went wrong. Please try again later.');
+    });
   }
 }
