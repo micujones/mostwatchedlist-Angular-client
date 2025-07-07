@@ -1,11 +1,31 @@
-<mat-card *ngFor="let movie of movies; let i = index">
-  <mat-dialog-content>
-    <mat-card-title>{{ movie.title }}</mat-card-title>
-    <mat-card-subtitle
+<h1>Most Watched List</h1>
+<div style="display: flex">
+  <mat-card *ngFor="let movie of movies; let i = index">
+    <mat-card-header>
+      <mat-card-title>{{ movie.title }}</mat-card-title>
+      <mat-card-subtitle>
+        Directed by {{ movie.director.name }}</mat-card-subtitle
+      >
+      <mat-card-subtitle>
+        Starring {{ movie.actors[0] }} and
+        {{ movie.actors[1] }}</mat-card-subtitle
+      >
+    </mat-card-header>
+    <mat-card-content
       ><img
         src="{{ movie.imagePath }}"
         alt="Movie poster for {{ movie.title }}"
-        width="150px"
-    /></mat-card-subtitle>
-  </mat-dialog-content>
-</mat-card>
+        style="object-fit: cover"
+        width="100%"
+    /></mat-card-content>
+
+    <mat-card-actions>
+      <button mat-button color="primary">Genre</button>
+      <button mat-button color="primary">Director</button>
+      <button mat-button color="primary">Synopsis</button>
+      <button mat-button color="primary">
+        <mat-icon style="margin: 0">favorite_border</mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
