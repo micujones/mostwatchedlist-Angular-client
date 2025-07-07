@@ -12,7 +12,7 @@ const apiUrl = 'https://mostwatchedlist-f9604e12841c.herokuapp.com/';
 @Injectable({
   providedIn: 'root',
 })
-export class UserRegistrationService {
+export class FetchApiDataService {
   // inject HttpClient module into constructor
   // available via this.http
   constructor(private http: HttpClient) {}
