@@ -18,8 +18,14 @@ export class MovieCardComponent implements OnInit {
   getMovies(): void {
     this.fetchMovies.getAllMovies().subscribe((response: any) => {
       this.movies = response;
-      console.log(this.movies);
       return this.movies;
+    });
+  }
+
+  addMovieToFavorites(movieId: string): void {
+    this.fetchMovies.addMovieToFavorites(movieId).subscribe((response: any) => {
+      const updatedUser: any = response;
+      localStorage.setItem('user', JSON.stringify(updatedUser));
     });
   }
 }

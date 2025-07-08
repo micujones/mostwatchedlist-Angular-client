@@ -7,7 +7,15 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 
+// Fetch URL variables
 const apiUrl = 'https://mostwatchedlist-f9604e12841c.herokuapp.com/';
+let token: string, user: any, username: string;
+
+const setUserVariables = () => {
+  token = localStorage.getItem('token') || '';
+  user = JSON.parse(localStorage.getItem('user') || '');
+  username = user.username;
+};
 
 @Injectable({
   providedIn: 'root',
@@ -20,33 +28,29 @@ export class FetchApiDataService {
   // USER ACCOUNT ACTIONS
 
   public userRegistration(userDetails: any): Observable<any> {
-    console.log('User details:', userDetails);
     return this.http
       .post(apiUrl + 'users', userDetails)
       .pipe(catchError(this.handleError));
   }
 
   public userLogin(userCredentials: any): Observable<any> {
-    console.log('User credentials:', userCredentials);
     return this.http
       .post(apiUrl + 'login', userCredentials)
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
   public getUser(): Observable<any> {
-    const username = localStorage.getItem('username');
+    setUserVariables();
     return this.http
-      .get(apiUrl + 'users/' + username)
+      .get(apiUrl + `users/${username}`)
       .pipe(catchError(this.handleError));
   }
 
   updateUser(userDetails: any): Observable<any> {
-    const token = localStorage.getItem('token');
-    const username = localStorage.getItem('username');
     return this.http
-      .put(apiUrl + 'users/' + username, userDetails, {
+      .put(apiUrl + `users/${username}`, userDetails, {
         headers: new HttpHeaders({
-          Authorization: 'Bearer ' + token,
+          Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         }),
       })
@@ -54,12 +58,10 @@ export class FetchApiDataService {
   }
 
   deleteUser(): Observable<any> {
-    const token = localStorage.getItem('token');
-    const username = localStorage.getItem('username');
     return this.http
-      .delete(apiUrl + 'users/' + username, {
+      .delete(apiUrl + `users/${username}`, {
         headers: new HttpHeaders({
-          Authorization: 'Bearer ' + token,
+          Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         }),
       })
@@ -69,20 +71,19 @@ export class FetchApiDataService {
   // MOVIE ACTIONS
 
   getAllMovies(): Observable<any> {
-    const token = localStorage.getItem('token');
+    setUserVariables();
     return this.http
       .get(apiUrl + 'movies', {
-        headers: new HttpHeaders({ Authorization: 'Bearer ' + token }),
+        headers: new HttpHeaders({ Authorization: `Bearer ${token}` }),
       })
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
   getMovie(title: string): Observable<any> {
-    const token = localStorage.getItem('token');
     return this.http
-      .get(apiUrl + 'movies/' + title, {
+      .get(apiUrl + `movies/${title}`, {
         headers: new HttpHeaders({
-          Authorization: 'Bearer ' + token,
+          Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         }),
       })
@@ -90,12 +91,10 @@ export class FetchApiDataService {
   }
 
   getFavoriteMovies(): Observable<any> {
-    const token = localStorage.getItem('token');
-    const username = localStorage.getItem('username');
     return this.http
-      .get(apiUrl + 'users/' + username + '/movies', {
+      .get(apiUrl + `users/${username}/movies`, {
         headers: new HttpHeaders({
-          Authorization: 'Bearer ' + token,
+          Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         }),
       })
@@ -103,25 +102,22 @@ export class FetchApiDataService {
   }
 
   addMovieToFavorites(movieId: string): Observable<any> {
-    const token = localStorage.getItem('token');
-    const username = localStorage.getItem('username');
+    console.log('Url:', apiUrl + `users/${username}/movies/${movieId}`);
     return this.http
-      .post(apiUrl + 'users/' + username + 'movies/' + movieId, {
+      .post(apiUrl + `users/${username}/movies/${movieId}`, {
         headers: new HttpHeaders({
-          Authorization: 'Bearer ' + token,
+          Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         }),
       })
-      .pipe(catchError(this.handleError));
+      .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
   removeMovieFromFavorites(movieId: string): Observable<any> {
-    const token = localStorage.getItem('token');
-    const username = localStorage.getItem('username');
     return this.http
-      .delete(apiUrl + 'users/' + username + 'movies/' + movieId, {
+      .delete(apiUrl + `users/${username}/movies/${movieId}`, {
         headers: new HttpHeaders({
-          Authorization: 'Bearer ' + token,
+          Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         }),
       })
@@ -129,25 +125,23 @@ export class FetchApiDataService {
   }
 
   getDirector(director: string): Observable<any> {
-    const token = localStorage.getItem('token');
     return this.http
-      .get(apiUrl + 'director/' + director, {
-        headers: new HttpHeaders({ Authorization: 'Bearer ' + token }),
+      .get(apiUrl + `director/${director}`, {
+        headers: new HttpHeaders({ Authorization: `Bearer ${token}` }),
       })
       .pipe(catchError(this.handleError));
   }
 
   getGenre(genre: string): Observable<any> {
-    const token = localStorage.getItem('token');
     return this.http
-      .get(apiUrl + 'genre/' + genre, {
-        headers: new HttpHeaders({ Authorization: 'Bearer ' + token }),
+      .get(apiUrl + `genre/${genre}`, {
+        headers: new HttpHeaders({ Authorization: `Bearer ${token}` }),
       })
       .pipe(catchError(this.handleError));
   }
 
   // Note to self: Object is replacing Response bc map expects an object
-  private extractResponseData(res: Object): any {
+  private extractResponseData(res: any): any {
     const body = res;
     return body || {};
   }
