@@ -19,9 +19,23 @@
     /></mat-card-content>
 
     <mat-card-actions>
-      <button mat-button color="primary">Genre</button>
-      <button mat-button color="primary">Director</button>
-      <button mat-button color="primary">Synopsis</button>
+      <button mat-button color="primary" (click)="openGenreDialog(movie.genre)">
+        Genre
+      </button>
+      <button
+        mat-button
+        color="primary"
+        (click)="openDirectorDialog(movie.director)"
+      >
+        Director
+      </button>
+      <button
+        mat-button
+        color="primary"
+        (click)="openSynopsisDialog(movie.title)"
+      >
+        Synopsis
+      </button>
       <button
         mat-button
         color="primary"

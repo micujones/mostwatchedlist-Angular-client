@@ -102,7 +102,6 @@ export class FetchApiDataService {
   }
 
   addMovieToFavorites(movieId: string): Observable<any> {
-    console.log('Url:', apiUrl + `users/${username}/movies/${movieId}`);
     return this.http
       .post(apiUrl + `users/${username}/movies/${movieId}`, {
         headers: new HttpHeaders({
@@ -126,7 +125,7 @@ export class FetchApiDataService {
 
   getDirector(director: string): Observable<any> {
     return this.http
-      .get(apiUrl + `director/${director}`, {
+      .get(apiUrl + `movies/director/${director}`, {
         headers: new HttpHeaders({ Authorization: `Bearer ${token}` }),
       })
       .pipe(catchError(this.handleError));
@@ -134,7 +133,7 @@ export class FetchApiDataService {
 
   getGenre(genre: string): Observable<any> {
     return this.http
-      .get(apiUrl + `genre/${genre}`, {
+      .get(apiUrl + `movies/genre/${genre}`, {
         headers: new HttpHeaders({ Authorization: `Bearer ${token}` }),
       })
       .pipe(catchError(this.handleError));
