@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "github-build": "ng build --configuration production --base-href 'https://micujones.github.io/mostwatchedlist-Angular-client/'"
+    "deploy": "ng deploy --base-href=/mostwatchedlist-Angular-client/"
   },
   "private": true,
   "dependencies": {
