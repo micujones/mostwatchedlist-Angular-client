@@ -11,6 +11,6 @@ export class AppComponent {
   title = 'mostwatchedlist-Angular-client';
 
   isLoggedIn(): boolean {
-    return JSON.parse(localStorage.getItem('isLoggedIn') || '');
+    return localStorage.getItem('isLoggedIn') === 'true';
   }
 }
