@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 // Dialogs
 import { MatDialog } from '@angular/material/dialog';
@@ -10,14 +11,15 @@ import { DirectorComponent } from '../director/director.component';
 @Component({
   selector: 'app-movie-card',
   templateUrl: './movie-card.component.html',
-  styleUrls: ['./movie-card.component.scss'],
+  styleUrls: ['./movie-card.component.scss', '../app.component.scss'],
 })
 export class MovieCardComponent implements OnInit {
-  movies: any[] = [];
+  @Input() public movies: any[] = [];
 
   constructor(
     public fetchMovies: FetchApiDataService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -25,18 +27,38 @@ export class MovieCardComponent implements OnInit {
   }
 
   getMovies(): void {
-    this.fetchMovies.getAllMovies().subscribe((response: any) => {
+    this.fetchMovies.getAllMovies().subscribe((response) => {
       this.movies = response;
       return this.movies;
     });
   }
 
+  // FAVORITE-RELATED METHODS
+
   addMovieToFavorites(movieId: string): void {
-    this.fetchMovies.addMovieToFavorites(movieId).subscribe((response: any) => {
+    this.fetchMovies.addMovieToFavorites(movieId).subscribe((response) => {
       const updatedUser: any = response;
       localStorage.setItem('user', JSON.stringify(updatedUser));
+      this.snackBar.open('Added to your favorites!', 'OK', { duration: 2000 });
     });
   }
+
+  removeMovieFromFavorites(movieId: string): void {
+    this.fetchMovies.removeMovieFromFavorites(movieId).subscribe((response) => {
+      const updatedUser: any = response;
+      localStorage.setItem('user', JSON.stringify(updatedUser));
+      this.snackBar.open('Removed from your favorites!', 'OK', {
+        duration: 2000,
+      });
+    });
+  }
+
+  isFavorited(movieId: string): boolean {
+    const user: any = JSON.parse(localStorage.getItem('user') || '');
+    return user.favoriteMovies.includes(movieId);
+  }
+
+  // DIALOG METHODS
 
   openGenreDialog(genre: any): void {
     this.dialog.open(GenreComponent, {

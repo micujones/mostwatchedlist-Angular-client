@@ -1,36 +1,50 @@
-<div>
-  <h1>{{ user.username }}</h1>
-  <p>{{ user.email }}</p>
-  <br />
-  <div style="display: flex">
-    <h2>Favorite Movies</h2>
-    <mat-card *ngFor="let movie of user.favoriteMovies"
-      ><mat-card-header>
-        <mat-card-title>{{ movie.title }}</mat-card-title>
-        <mat-card-subtitle>
-          Directed by {{ movie.director.name }}</mat-card-subtitle
-        >
-        <mat-card-subtitle>
-          Starring {{ movie.actors[0] }} and
-          {{ movie.actors[1] }}</mat-card-subtitle
-        >
-      </mat-card-header>
-      <mat-card-content
-        ><img
-          src="{{ movie.imagePath }}"
-          alt="Movie poster for {{ movie.title }}"
-          style="object-fit: cover"
-          width="100%"
-      /></mat-card-content>
-
-      <mat-card-actions>
-        <button mat-button color="primary">Genre</button>
-        <button mat-button color="primary">Director</button>
-        <button mat-button color="primary">Synopsis</button>
-        <button mat-button color="primary">
-          <mat-icon style="margin: 0">favorite_border</mat-icon>
-        </button>
-      </mat-card-actions></mat-card
-    >
+<div style="padding: 0px 16px">
+  <div class="profile-header">
+    <h1>{{ user.username }}</h1>
+    <button class="action-icon" [matMenuTriggerFor]="menu">
+      <mat-icon style="margin: 0">settings</mat-icon>
+    </button>
   </div>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="openUpdateUserDialog()">Edit profile</button>
+    <button mat-menu-item disabled="" (click)="openDeleteUserDialog()">
+      Delete account
+    </button>
+  </mat-menu>
+  <p style="margin: 0">{{ user.email }}</p>
+  <br />
+  <div *ngIf="favoriteMovies.length">
+    <h2>Favorite Movies</h2>
+    <div class="favorite-movies-grid">
+      <mat-card
+        class="movie-card"
+        appearance="outlined"
+        *ngFor="let movie of favoriteMovies"
+      >
+        <mat-card-header class="card-section">
+          <mat-card-title class="card-header">{{ movie.title }}</mat-card-title>
+          <mat-card-subtitle class="card-subtitle">
+            Directed by {{ movie.director.name }}</mat-card-subtitle
+          >
+          <mat-card-subtitle class="card-subtitle">
+            Starring {{ movie.actors[0] }} and
+            {{ movie.actors[1] }}</mat-card-subtitle
+          >
+        </mat-card-header>
+        <mat-card-content>
+          <img
+            src="{{ movie.imagePath }}"
+            alt="Movie poster for {{ movie.title }}"
+            style="width: 100%; border-radius: 4px"
+          />
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <div *ngIf="favoriteMovies.length === 0">
+    <h3>Add some movies to your favorites!</h3>
+    <!-- Some icon here to navigate to movies page -->
+  </div>
+
+  <!-- <app-movie-card [movies]="favoriteMovies"></app-movie-card> -->
 </div>

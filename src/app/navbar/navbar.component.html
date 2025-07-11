@@ -1,9 +1,25 @@
 <mat-toolbar class="navbar">
   <div class="navbar-logo">
-    <img src="/src/assets/brand-logo.jpeg" alt="Most Watched List logo" />
+    <a routerLink="/movies"
+      ><img
+        src="../../assets/brand-logo.svg"
+        height="30px"
+        alt="Most Watched List logo"
+    /></a>
   </div>
   <div class="navbar-actions">
-    <a matButton routerLink="/movies" target="_self">Movies</a>
-    <a matButton routerLink="/profile" target="_self">Profile</a>
+    <a style="color: black" routerLink="/movies" target="_self"
+      ><mat-icon style="margin: 0">movie</mat-icon></a
+    >
+    <a style="color: black" routerLink="/profile" target="_self"
+      ><mat-icon style="margin: 0">account_circle</mat-icon></a
+    >
+    <a
+      style="color: black"
+      routerLink="/welcome"
+      target="_self"
+      (click)="logout()"
+      ><mat-icon style="margin: 0">logout</mat-icon></a
+    >
   </div>
 </mat-toolbar>

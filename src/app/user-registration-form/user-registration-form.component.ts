@@ -8,7 +8,10 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 @Component({
   selector: 'app-user-registration-form',
   templateUrl: './user-registration-form.component.html',
-  styleUrls: ['./user-registration-form.component.scss'],
+  styleUrls: [
+    './user-registration-form.component.scss',
+    '../app.component.scss',
+  ],
 })
 export class UserRegistrationFormComponent implements OnInit {
   @Input() userData = { username: '', password: '', email: '', birthday: '' };
@@ -19,12 +22,15 @@ export class UserRegistrationFormComponent implements OnInit {
     public snackBar: MatSnackBar
   ) {}
 
+  ngOnInit(): void {}
+
   registerUser(): void {
     this.fetchApiData.userRegistration(this.userData).subscribe(
       (response) => {
-        this.dialogRef.close(); // Closes on success
-        console.log('Registration response', response);
-        this.snackBar.open('Registered successfully', 'OK', { duration: 2000 });
+        this.dialogRef.close();
+        this.snackBar.open('Registered successfully!', 'OK', {
+          duration: 2000,
+        });
       },
       (response) => {
         console.log(response);
@@ -32,6 +38,4 @@ export class UserRegistrationFormComponent implements OnInit {
       }
     );
   }
-
-  ngOnInit(): void {}
 }

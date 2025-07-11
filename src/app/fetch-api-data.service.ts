@@ -11,7 +11,7 @@ import { Observable, throwError } from 'rxjs';
 const apiUrl = 'https://mostwatchedlist-f9604e12841c.herokuapp.com/';
 let token: string, user: any, username: string;
 
-const setUserVariables = () => {
+const getUserVariables = () => {
   token = localStorage.getItem('token') || '';
   user = JSON.parse(localStorage.getItem('user') || '');
   username = user.username;
@@ -40,13 +40,14 @@ export class FetchApiDataService {
   }
 
   public getUser(): Observable<any> {
-    setUserVariables();
+    getUserVariables();
     return this.http
       .get(apiUrl + `users/${username}`)
       .pipe(catchError(this.handleError));
   }
 
   updateUser(userDetails: any): Observable<any> {
+    getUserVariables();
     return this.http
       .put(apiUrl + `users/${username}`, userDetails, {
         headers: new HttpHeaders({
@@ -58,6 +59,7 @@ export class FetchApiDataService {
   }
 
   deleteUser(): Observable<any> {
+    getUserVariables();
     return this.http
       .delete(apiUrl + `users/${username}`, {
         headers: new HttpHeaders({
@@ -71,7 +73,7 @@ export class FetchApiDataService {
   // MOVIE ACTIONS
 
   getAllMovies(): Observable<any> {
-    setUserVariables();
+    getUserVariables();
     return this.http
       .get(apiUrl + 'movies', {
         headers: new HttpHeaders({ Authorization: `Bearer ${token}` }),
@@ -102,14 +104,19 @@ export class FetchApiDataService {
   }
 
   addMovieToFavorites(movieId: string): Observable<any> {
+    getUserVariables();
     return this.http
-      .post(apiUrl + `users/${username}/movies/${movieId}`, {
-        headers: new HttpHeaders({
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        }),
-      })
-      .pipe(map(this.extractResponseData), catchError(this.handleError));
+      .post(
+        apiUrl + `users/${username}/movies/${movieId}`,
+        {},
+        {
+          headers: new HttpHeaders({
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          }),
+        }
+      )
+      .pipe(catchError(this.handleError));
   }
 
   removeMovieFromFavorites(movieId: string): Observable<any> {
@@ -150,7 +157,8 @@ export class FetchApiDataService {
       console.error('An error occurred:', error.error.message);
     } else {
       console.error(
-        `Error Status code ${error.status},` + `Error body: ${error.error}`
+        `Error Status code ${error.status}, ` + 'Error body:',
+        error.error
       );
     }
 

@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-user-login-form',
   templateUrl: './user-login-form.component.html',
-  styleUrls: ['./user-login-form.component.scss'],
+  styleUrls: ['./user-login-form.component.scss', '../app.component.scss'],
 })
 export class UserLoginFormComponent implements OnInit {
   @Input() userCredentials = { username: '', password: '' };
@@ -27,10 +27,10 @@ export class UserLoginFormComponent implements OnInit {
     this.fetchApiData.userLogin(this.userCredentials).subscribe(
       (response) => {
         this.dialogRef.close();
-        console.log('Login response', response);
         if (response.user) {
           localStorage.setItem('user', JSON.stringify(response.user));
           localStorage.setItem('token', response.token);
+          localStorage.setItem('isLoggedIn', 'true');
         }
         this.snackBar.open('Login successful.', 'OK', { duration: 2000 });
         this.router.navigate(['movies']);

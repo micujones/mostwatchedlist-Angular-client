@@ -1,0 +1,16 @@
+.profile-header {
+  display: flex;
+}
+.action-icon {
+  background-color: transparent;
+  border: none;
+  padding-left: 16px;
+  transform: scale(0.75);
+}
+
+.favorite-movies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 300px);
+  gap: 16px;
+  padding-bottom: 16px;
+}

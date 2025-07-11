@@ -1,0 +1,15 @@
+<mat-card
+  ><mat-card-header class="card-section"
+    ><mat-card-title class="card-header">Are you sure?</mat-card-title>
+    <mat-card-subtitle class="card-subtitle"
+      >This action cannot be undone.</mat-card-subtitle
+    ></mat-card-header
+  >
+  <br />
+  <mat-card-actions class="card-section" style="flex-direction: row; gap: 12px"
+    ><button mat-button mat-dialog-close>Cancel</button>
+    <button mat-flat-button color="warn" (click)="deleteUser()">
+      Delete
+    </button></mat-card-actions
+  ></mat-card
+>

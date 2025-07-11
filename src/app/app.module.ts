@@ -16,6 +16,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatMenuModule } from '@angular/material/menu';
 import { FormsModule } from '@angular/forms';
 
 // COMPONENTS
@@ -27,6 +28,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { GenreComponent } from './genre/genre.component';
 import { DirectorComponent } from './director/director.component';
 import { SynopsisComponent } from './synopsis/synopsis.component';
+import { UserUpateComponent } from './user-upate/user-upate.component';
+import { UserDeleteComponent } from './user-delete/user-delete.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +43,8 @@ import { SynopsisComponent } from './synopsis/synopsis.component';
     GenreComponent,
     DirectorComponent,
     SynopsisComponent,
+    UserUpateComponent,
+    UserDeleteComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,6 +59,7 @@ import { SynopsisComponent } from './synopsis/synopsis.component';
     MatSnackBarModule,
     MatIconModule,
     MatToolbarModule,
+    MatMenuModule,
     FormsModule,
   ],
   providers: [],
