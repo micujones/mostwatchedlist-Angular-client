@@ -28,7 +28,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { GenreComponent } from './genre/genre.component';
 import { DirectorComponent } from './director/director.component';
 import { SynopsisComponent } from './synopsis/synopsis.component';
-import { UserUpateComponent } from './user-upate/user-upate.component';
+import { UserUpdateComponent } from './user-update/user-update.component';
 import { UserDeleteComponent } from './user-delete/user-delete.component';
 
 @NgModule({
@@ -43,7 +43,7 @@ import { UserDeleteComponent } from './user-delete/user-delete.component';
     GenreComponent,
     DirectorComponent,
     SynopsisComponent,
-    UserUpateComponent,
+    UserUpdateComponent,
     UserDeleteComponent,
   ],
   imports: [

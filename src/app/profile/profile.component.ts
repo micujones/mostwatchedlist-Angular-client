@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatDialog } from '@angular/material/dialog';
-import { UserUpateComponent } from '../user-upate/user-upate.component';
+import { UserUpdateComponent } from '../user-update/user-update.component';
 import { UserDeleteComponent } from '../user-delete/user-delete.component';
 import { MovieCardComponent } from '../movie-card/movie-card.component';
 
@@ -43,7 +43,7 @@ export class ProfileComponent implements OnInit {
   // }
 
   openUpdateUserDialog(): void {
-    this.dialog.open(UserUpateComponent, { width: '400px' });
+    this.dialog.open(UserUpdateComponent, { width: '400px' });
   }
 
   openDeleteUserDialog(): void {

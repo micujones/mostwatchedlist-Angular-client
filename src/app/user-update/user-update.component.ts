@@ -4,11 +4,11 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { FetchApiDataService } from '../fetch-api-data.service';
 
 @Component({
-  selector: 'app-user-upate',
-  templateUrl: './user-upate.component.html',
-  styleUrls: ['./user-upate.component.scss', '../app.component.scss'],
+  selector: 'app-user-update',
+  templateUrl: './user-update.component.html',
+  styleUrls: ['./user-update.component.scss', '../app.component.scss'],
 })
-export class UserUpateComponent implements OnInit {
+export class UserUpdateComponent implements OnInit {
   user: any = JSON.parse(localStorage.getItem('user') || '');
 
   oldUser = {
@@ -27,7 +27,7 @@ export class UserUpateComponent implements OnInit {
 
   constructor(
     public fetchUser: FetchApiDataService,
-    public dialogRef: MatDialogRef<UserUpateComponent>,
+    public dialogRef: MatDialogRef<UserUpdateComponent>,
     public snackBar: MatSnackBar
   ) {}
 
