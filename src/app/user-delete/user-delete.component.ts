@@ -17,6 +17,7 @@ export class UserDeleteComponent {
     private router: Router
   ) {}
 
+  /** Deletes the current user from the database. */
   deleteUser(): void {
     this.fetchUser.deleteUser().subscribe((response) => {
       this.dialogRef.close();

@@ -12,6 +12,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-login-form.component.scss', '../app.component.scss'],
 })
 export class UserLoginFormComponent implements OnInit {
+  /**
+   * User credentials are populated from user input in the {@link dialogRef | dialog reference}.
+   */
   @Input() userCredentials = { username: '', password: '' };
 
   constructor(
@@ -21,8 +24,12 @@ export class UserLoginFormComponent implements OnInit {
     private router: Router
   ) {}
 
+  /** @hidden */
   ngOnInit(): void {}
 
+  /**
+   * Logs in the user using a provided username and password
+   */
   loginUser(): void {
     this.fetchApiData.userLogin(this.userCredentials).subscribe(
       (response) => {

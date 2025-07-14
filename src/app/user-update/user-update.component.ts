@@ -11,6 +11,10 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 export class UserUpdateComponent implements OnInit {
   user: any = JSON.parse(localStorage.getItem('user') || '');
 
+  /**
+   * Provides a tertiary container to refer to the previous
+   * values in the {@link user} object.
+   * */
   oldUser = {
     // Pull properties that can be updated
     username: this.user.username || '',
@@ -18,6 +22,10 @@ export class UserUpdateComponent implements OnInit {
     email: this.user.email,
   };
 
+  /**
+   * The object where input is updated in real time and used
+   * as the body object in {@link updateUser}'s fetch request.
+   */
   @Input() updatedUser = {
     username: '',
     password: '',
@@ -31,14 +39,14 @@ export class UserUpdateComponent implements OnInit {
     public snackBar: MatSnackBar
   ) {}
 
-  ngOnInit(): void {
-    this.setUser();
-  }
+  /** @hidden */
+  ngOnInit(): void {}
 
-  setUser(): void {
-    this.user = JSON.parse(localStorage.getItem('user') || '');
-  }
-
+  /**
+   * Checks if any values from the dialog are left empty,
+   * so that it can be set to the previous values stored
+   * in the {@link oldUser} object.
+   */
   private checkInputUpdated(): void {
     const entries = Object.entries(this.updatedUser); // Source: https://www.youtube.com/watch?v=UxMdQmJfWM8
     for (const [key, value] of entries) {
@@ -46,6 +54,7 @@ export class UserUpdateComponent implements OnInit {
     }
   }
 
+  /** Updates the value which was determined to be an empty string */
   private updateEmptyValue(key: string): void {
     switch (key) {
       case 'username':
@@ -62,6 +71,10 @@ export class UserUpdateComponent implements OnInit {
     }
   }
 
+  /**
+   * Updates the {@link user}'s data based on the user input
+   * in the {@link updatedUser} object.
+   */
   updateUser(): void {
     this.checkInputUpdated();
     this.fetchUser.updateUser(this.updatedUser).subscribe((response) => {

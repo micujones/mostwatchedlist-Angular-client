@@ -22,10 +22,14 @@ export class MovieCardComponent implements OnInit {
     public snackBar: MatSnackBar
   ) {}
 
+  /** @hidden */
   ngOnInit(): void {
     this.getMovies();
   }
 
+  /**
+   * This method fetches all of the movies in the database.
+   */
   getMovies(): void {
     this.fetchMovies.getAllMovies().subscribe((response) => {
       this.movies = response;
@@ -35,6 +39,12 @@ export class MovieCardComponent implements OnInit {
 
   // FAVORITE-RELATED METHODS
 
+  /**
+   * This method adds a movie's ID to the user's favorite movies.
+   *
+   * @param {string} movieId - the movie's ID in the database
+   * @returns Replaces the locally storred user with an updated user object
+   */
   addMovieToFavorites(movieId: string): void {
     this.fetchMovies.addMovieToFavorites(movieId).subscribe((response) => {
       const updatedUser: any = response;
@@ -43,6 +53,12 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
+  /**
+   * This method removies a movie's ID from the user's favorite movies.
+   *
+   * @param {string} movieId - the movie's ID in the database
+   * @returns Replaces the locally storred user with an updated user object
+   */
   removeMovieFromFavorites(movieId: string): void {
     this.fetchMovies.removeMovieFromFavorites(movieId).subscribe((response) => {
       const updatedUser: any = response;
@@ -53,6 +69,7 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
+  /** @hidden */
   isFavorited(movieId: string): boolean {
     const user: any = JSON.parse(localStorage.getItem('user') || '');
     return user.favoriteMovies.includes(movieId);
@@ -60,6 +77,10 @@ export class MovieCardComponent implements OnInit {
 
   // DIALOG METHODS
 
+  /**
+   * Opens a dialog with the genre's description
+   * @param {any} genre - Genre object
+   */
   openGenreDialog(genre: any): void {
     this.dialog.open(GenreComponent, {
       data: { genre: genre },
@@ -67,6 +88,10 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
+  /**
+   * Opens a dialog with the director's bio
+   * @param {any} director - Director object
+   */
   openDirectorDialog(director: any): void {
     this.dialog.open(DirectorComponent, {
       data: { director: director },
@@ -74,6 +99,10 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
+  /**
+   * Opens a dialog with the synopsis of the movie
+   * @param {string} title - Title of the movie
+   */
   openSynopsisDialog(title: string): void {
     this.dialog.open(SynopsisComponent, {
       data: { title: title },

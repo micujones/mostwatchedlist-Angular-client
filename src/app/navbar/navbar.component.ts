@@ -7,6 +7,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.scss', '../app.component.scss'],
 })
 export class NavbarComponent {
+  /**
+   * Logouts user by setting login to false
+   * and removing the user data and token from local storage
+   */
   logout(): void {
     localStorage.removeItem('user');
     localStorage.removeItem('token');

@@ -22,8 +22,10 @@ export class UserRegistrationFormComponent implements OnInit {
     public snackBar: MatSnackBar
   ) {}
 
+  /** @hidden */
   ngOnInit(): void {}
 
+  /** Registers the user in the database */
   registerUser(): void {
     this.fetchApiData.userRegistration(this.userData).subscribe(
       (response) => {

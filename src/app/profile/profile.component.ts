@@ -11,7 +11,9 @@ import { MovieCardComponent } from '../movie-card/movie-card.component';
   styleUrls: ['./profile.component.scss', '../app.component.scss'],
 })
 export class ProfileComponent implements OnInit {
+  /** The user object pulled from local storage */
   user: any = JSON.parse(localStorage.getItem('user') || '');
+  /** An empty array to be populated {@link ngOnInit | when mounting} the app. */
   favoriteMovies: any[] = [];
 
   constructor(
@@ -20,10 +22,15 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.getUser();
     this.getFavoriteMovies();
   }
 
+  /**
+   * Fetches the {@link user}'s favorite movies and adds them
+   * to the {@link favoriteMovies} array based on the movie IDs.
+   *
+   * @returns Array of movie objects
+   */
   getFavoriteMovies(): void {
     this.fetchUser.getAllMovies().subscribe((response) => {
       response.forEach((movie: any) => {
@@ -33,19 +40,15 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  // getUser(): void {
-  //   this.fetchUser.getUser().subscribe((response: any) => {
-  //     console.log(response);
-  //     this.user = response;
-  //     localStorage.setItem('user', JSON.stringify(this.user));
-  //     this.favoriteMovies = this.user.favoriteMovies;
-  //   });
-  // }
-
+  /**
+   * Opens a dialog for updating the {@link user}'s
+   * username, password, and/or email.
+   */
   openUpdateUserDialog(): void {
     this.dialog.open(UserUpdateComponent, { width: '400px' });
   }
 
+  /** Opens a dialog for deleting the {@link user} */
   openDeleteUserDialog(): void {
     this.dialog.open(UserDeleteComponent, { width: '300px' });
   }

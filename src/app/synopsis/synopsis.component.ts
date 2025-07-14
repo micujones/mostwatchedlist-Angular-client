@@ -21,6 +21,10 @@ export class SynopsisComponent implements OnInit {
     this.getMovieSynopsis();
   }
 
+  /**
+   * This method fetches the data of a movie
+   * @returns {string} - string of the movie's description
+   */
   getMovieSynopsis(): void {
     this.fetchSynopsis.getMovie(this.data.title).subscribe((response) => {
       this.synopsis = response[0].description;

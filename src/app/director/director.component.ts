@@ -18,10 +18,15 @@ export class DirectorComponent implements OnInit {
     public dialogRef: MatDialogRef<DirectorComponent>
   ) {}
 
+  /** @hidden */
   ngOnInit(): void {
     this.getDirector();
   }
 
+  /**
+   * This method fetches the data of a movie's director
+   * @returns {Object} Object includes the director's name and bio
+   */
   getDirector(): void {
     this.fetchDirector
       .getDirector(this.data.director.name)

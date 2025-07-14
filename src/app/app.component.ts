@@ -10,6 +10,11 @@ import { filter } from 'rxjs/operators';
 export class AppComponent {
   title = 'mostwatchedlist-Angular-client';
 
+  /**
+   * Evaluates if locally stored key 'isLoggedIn' is equal to true.
+   *
+   * @returns {boolean} Is they key 'isLoggedIn' set to 'true'
+   */
   isLoggedIn(): boolean {
     return localStorage.getItem('isLoggedIn') === 'true';
   }

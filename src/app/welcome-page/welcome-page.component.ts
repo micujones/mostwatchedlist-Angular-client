@@ -11,15 +11,21 @@ import { UserLoginFormComponent } from '../user-login-form/user-login-form.compo
 export class WelcomePageComponent implements OnInit {
   constructor(public dialog: MatDialog) {}
 
+  /** @hidden */
   ngOnInit(): void {}
 
-  // Open the dialog when button is clicked
+  /**
+   * Opens the user registration dialog.
+   */
   openUserRegistrationDialog(): void {
     this.dialog.open(UserRegistrationFormComponent, {
       width: '480px',
     });
   }
 
+  /**
+   * Opens the user login dialog.
+   */
   openUserLoginDialog(): void {
     this.dialog.open(UserLoginFormComponent, { width: '480px' });
   }

@@ -20,10 +20,15 @@ export class GenreComponent implements OnInit {
     public dialogRef: MatDialogRef<GenreComponent>
   ) {}
 
+  /** @hidden */
   ngOnInit(): void {
     this.getGenre();
   }
 
+  /**
+   * This method fetches the data of a genre
+   * @returns {string} - string of the genre's description
+   */
   getGenre(): void {
     this.fetchGenre.getGenre(this.data.genre.name).subscribe((response) => {
       this.genre.description = response;
