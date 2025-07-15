@@ -33,8 +33,6 @@
       "src/app/fetch-api-data.service.ts"
     ],
     "out": "docs",
-    "navigation": {
-      "includeFolders": false
-    }
+    "includeHierarchySummary": false
   }
 }
