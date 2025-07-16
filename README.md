@@ -1,6 +1,14 @@
-# MostwatchedlistAngularClient
+# Most Watched List (Angular)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.0.
+The Angular-built client-side for an application called Most Watched List based on its existing server-side code (REST API and database), with supporting documentation.
+
+## Features
+
+- Register and login a user
+- View a list of movie cards with information about each movie, such as featured actors, directors, etc.
+- Add or remove movies a user's favorites list
+
+## Tools
 
 ## Development server
 
@@ -10,18 +18,24 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The appli
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+## Usage
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Main View
 
-## Running unit tests
+The main view includes movie cards for all of the movies in the database. The actions at the bottom of each card trigger a modal with more details:<br>
+<img src="screenshots/screenshot_main-view.png" width="450px"> <img src="screenshots/screenshot_main-view_details.png" width="450px">
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Profile View
 
-## Running end-to-end tests
+The profile view renders the user's username, email, and favorite movies:<br>
+<img src="screenshots/screenshot_profile-view.png" height="350px"> <img src="screenshots/screenshot_profile-view_update.png" height="350px">
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Build for GitHub Pages
 
-## Further help
+1. Run `ng build --output-path docs --base-href /your-project-name/` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+   _**Note:** Be sure to include the slashes on either side of your project name as in `/your_project_name/`_
+
+2. When the build is complete, make a copy of `docs/index.html` and name it `docs/404.html`.
+
+3. Commit your changes and push.

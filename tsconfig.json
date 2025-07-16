@@ -32,7 +32,7 @@
       "src/app/*/*.component.ts",
       "src/app/fetch-api-data.service.ts"
     ],
-    "out": "docs",
+    "out": "documentation",
     "includeHierarchySummary": false
   }
 }
