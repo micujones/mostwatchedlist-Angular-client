@@ -39,3 +39,14 @@ The profile view renders the user's username, email, and favorite movies:<br>
 2. When the build is complete, make a copy of `docs/index.html` and name it `docs/404.html`.
 
 3. Commit your changes and push.
+
+## Push Documentation
+
+Creates a new folder `/documentation` and writes output to it.
+
+```sh
+npx typedoc --out documentation
+```
+
+The output documentation can be accessed in `documentation/modules.html` using the Live Server. The above command needs to be run in order to view changes that are made in the typedoc comments.<br><br>
+Be sure to push these changes to GitHub.
