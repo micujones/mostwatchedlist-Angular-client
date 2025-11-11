@@ -2,7 +2,7 @@
   <mat-card
     class="movie-card"
     appearance="outlined"
-    *ngFor="let movie of movies; let i = index"
+    *ngFor="let movie of movies; index as i"
   >
     <mat-card-header class="card-section">
       <mat-card-title class="card-header">{{ movie.title }}</mat-card-title>

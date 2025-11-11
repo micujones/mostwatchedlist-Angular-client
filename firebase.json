@@ -1,0 +1,16 @@
+{
+  "hosting": {
+    "public": "dist/mostwatchedlist-angular-client",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

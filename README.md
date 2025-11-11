@@ -2,6 +2,8 @@
 
 The Angular-built client-side for an application called Most Watched List based on its existing server-side code (REST API and database), with supporting documentation.
 
+Hosted Site: [MostWatchedList](https://most-watched-list.firebaseapp.com/movies)
+
 ## Features
 
 - Register and login a user
@@ -30,15 +32,19 @@ The main view includes movie cards for all of the movies in the database. The ac
 The profile view renders the user's username, email, and favorite movies:<br>
 <img src="screenshots/screenshot_profile-view.png" height="350px"> <img src="screenshots/screenshot_profile-view_update.png" height="350px">
 
-## Build for GitHub Pages
+## Hosting with Firebase
 
-1. Run `ng build --output-path docs --base-href /your-project-name/` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-   _**Note:** Be sure to include the slashes on either side of your project name as in `/your_project_name/`_
-
-2. When the build is complete, make a copy of `docs/index.html` and name it `docs/404.html`.
-
-3. Commit your changes and push.
+1. Run `npm run build` to build the app for deployment.<br>
+   _**Note:** A folder `dist/your-app-name` will be created in the root directory of the project._
+2. Set up a Firebase project to associate with this application in the Firebase console.
+3. Install the Firebase CLI with `npm install -g firebase-tools`.
+4. Log into Firebase using `firebase login`.
+5. Initialize the project with `firebase init hosting`.<br><br>_The Firebase CLI will provide prompts in the terminal_
+6. Select the Firebase project you are using for this application.
+7. Specify the public folder as `dist/your-app-name`
+8. Configure as a single-page app (i.e., enter "y").
+9. Do not overwrite dist/your-app-name/index.html (i.e., enter "n").
+10. Run `firebase deploy` and the Firebase CLI will provide a Hosting URL in the terminal.
 
 ## Push Documentation
 
