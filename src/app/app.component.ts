@@ -11,11 +11,11 @@ export class AppComponent {
   title = 'mostwatchedlist-Angular-client';
 
   /**
-   * Evaluates if locally stored key 'isLoggedIn' is equal to true.
+   * Evaluates if locally stored key 'user' is null.
    *
-   * @returns {boolean} Is they key 'isLoggedIn' set to 'true'
+   * @returns {boolean} Is the key 'isLoggedIn' set to 'true'
    */
   isLoggedIn(): boolean {
-    return localStorage.getItem('isLoggedIn') === 'true';
+    return localStorage.getItem('user') !== null;
   }
 }
